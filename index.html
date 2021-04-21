@@ -13,21 +13,89 @@
   <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
   <script type="text/babel">
-    const name = "Bob";
-    const element = (
+    function Section({ id, title, children }) {
+      return (
+        <section id={id} className="box">
+          <h1 className="title">{title}</h1>
+          {children}
+        </section>
+      );
+    }
+
+    function DefinitionList({ items }) {
+      return (
+        <dl className="definition">
+          {items.map(item => (
+            <React.Fragment key={item.title}>
+              <dt className="definition-title">
+                {item.title}
+              </dt>
+              <dd className="definition-content">
+                {item.content}
+              </dd>
+            </React.Fragment>
+          ))}
+        </dl>
+      );
+    }
+
+    const app = (
       <>
-        <p>Hello, {name}</p>
-        <ul className="list">
-          <li className="list-items">List 1</li>
-          <li className="list-items">List 2</li>
-          <li className="list-items">List 3</li>
-        </ul>
+        <Section id="react" title="React">
+          <DefinitionList
+            items={[
+              { title: 'Initial release', content: '2013/5' },
+              { title: 'Github stars', content: '147,940' }
+            ]}
+          />
+        </Section>
+        <Section id="vue" title="Vue.js">
+          <DefinitionList
+            items={[
+              { title: 'Initial release', content: '2014/2' },
+              { title: 'Github stars', content: '163,165' }
+            ]}
+          />
+        </Section>
+        <Section id="angular" title="Angular">
+          <DefinitionList
+            items={[
+              { title: 'Initial release', content: '2016/9' },
+              { title: 'Github stars', content: '60,571' }
+            ]}
+          />
+        </Section>
       </>
     );
-    // <p id="the-text" className="text">Hello World</p>;
+
     const root = document.getElementById('root');
-    ReactDOM.render(element, root);
+    ReactDOM.render(app, root);
+
+    // function Gif({ id }) {
+    //   const src = `https://media.giphy.com/media/${id}/giphy.gif`;
+    //   return <img src={src} alt="" />;
+    // }
+
+    // const app = <Gif id="33OrjzUFwkwEg" />;
+
+    // const root = document.getElementById('root');
+    // ReactDOM.render(app, root);
+
+    // const name = "Bob";
+    // const element = (
+    //   <>
+    //     <p>Hello, {name}</p>
+    //     <ul className="list">
+    //       <li className="list-items">List 1</li>
+    //       <li className="list-items">List 2</li>
+    //       <li className="list-items">List 3</li>
+    //     </ul>
+    //   </>
+    // );
+    // const root = document.getElementById('root');
+    // ReactDOM.render(element, root);
   </script>
 </body>
 </html>
