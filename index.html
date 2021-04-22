@@ -13,7 +13,7 @@
   <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
+  
   <script type="text/babel">
     function Section({ id, title, children }) {
       return (
@@ -73,29 +73,29 @@
     const root = document.getElementById('root');
     ReactDOM.render(app, root);
 
-    function Gif({ id }) {
-      const src = `https://media.giphy.com/media/${id}/giphy.gif`;
-      return <img src={src} alt="" />;
-    }
+    // function Gif({ id }) {
+    //   const src = `https://media.giphy.com/media/${id}/giphy.gif`;
+    //   return <img src={src} alt="" />;
+    // }
 
-    const app = <Gif id="33OrjzUFwkwEg" />;
+    // const app = <Gif id="33OrjzUFwkwEg" />;
 
-    const root = document.getElementById('root');
-    ReactDOM.render(app, root);
+    // const root = document.getElementById('root');
+    // ReactDOM.render(app, root);
 
-    const name = "Bob";
-    const element = (
-      <>
-        <p>Hello, {name}</p>
-        <ul className="list">
-          <li className="list-items">List 1</li>
-          <li className="list-items">List 2</li>
-          <li className="list-items">List 3</li>
-        </ul>
-      </>
-    );
-    const root = document.getElementById('root');
-    ReactDOM.render(element, root);
+    // const name = "Bob";
+    // const element = (
+    //   <>
+    //     <p>Hello, {name}</p>
+    //     <ul className="list">
+    //       <li className="list-items">List 1</li>
+    //       <li className="list-items">List 2</li>
+    //       <li className="list-items">List 3</li>
+    //     </ul>
+    //   </>
+    // );
+    // const root = document.getElementById('root');
+    // ReactDOM.render(element, root);
   </script>
 </body>
 </html>
