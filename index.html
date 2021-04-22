@@ -15,87 +15,90 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   
   <script type="text/babel">
-    function Section({ id, title, children }) {
-      return (
-        <section id={id} className="box">
-          <h1 className="title">{title}</h1>
-          {children}
-        </section>
-      );
-    }
+    // ▼カウントボタン(stateの更新)
+    function CountButton() {
+      const countState = React.useState(0);
+      // countState[0] => 状態
+      // countState[1] => 状態を更新するための関数
+      const count = countState[0];
+      const setCount = countState[1];
 
-    function DefinitionList({ items }) {
-      return (
-        <dl className="definition">
-          {items.map(item => (
-            <React.Fragment key={item.title}>
-              <dt className="definition-title">
-                {item.title}
-              </dt>
-              <dd className="definition-content">
-                {item.content}
-              </dd>
-            </React.Fragment>
-          ))}
-        </dl>
-      );
-    }
+      const handleClick = () => setCount(count + 1);
 
-    const app = (
-      <>
-        <Section id="react" title="React">
-          <DefinitionList
-            items={[
-              { title: 'Initial release', content: '2013/5' },
-              { title: 'Github stars', content: '147,940' }
-            ]}
-          />
-        </Section>
-        <Section id="vue" title="Vue.js">
-          <DefinitionList
-            items={[
-              { title: 'Initial release', content: '2014/2' },
-              { title: 'Github stars', content: '163,165' }
-            ]}
-          />
-        </Section>
-        <Section id="angular" title="Angular">
-          <DefinitionList
-            items={[
-              { title: 'Initial release', content: '2016/9' },
-              { title: 'Github stars', content: '60,571' }
-            ]}
-          />
-        </Section>
-      </>
-    );
+      return <button onClick={handleClick}>{count}</button>;
+    }
 
     const root = document.getElementById('root');
-    ReactDOM.render(app, root);
+    ReactDOM.render(<CountButton />, root);
 
+    // ▼リスト
+    // function Section({ id, title, children }) {
+    //   return (
+    //     <section id={id} className="box">
+    //       <h1 className="title">{title}</h1>
+    //       {children}
+    //     </section>
+    //   );
+    // }
+
+    // function DefinitionList({ items }) {
+    //   return (
+    //     <dl className="definition">
+    //       {items.map(item => (
+    //         <React.Fragment key={item.title}>
+    //           <dt className="definition-title">
+    //             {item.title}
+    //           </dt>
+    //           <dd className="definition-content">
+    //             {item.content}
+    //           </dd>
+    //         </React.Fragment>
+    //       ))}
+    //     </dl>
+    //   );
+    // }
+
+    // const app = (
+    //   <>
+    //     <Section id="react" title="React">
+    //       <DefinitionList
+    //         items={[
+    //           { title: 'Initial release', content: '2013/5' },
+    //           { title: 'Github stars', content: '147,940' }
+    //         ]}
+    //       />
+    //     </Section>
+    //     <Section id="vue" title="Vue.js">
+    //       <DefinitionList
+    //         items={[
+    //           { title: 'Initial release', content: '2014/2' },
+    //           { title: 'Github stars', content: '163,165' }
+    //         ]}
+    //       />
+    //     </Section>
+    //     <Section id="angular" title="Angular">
+    //       <DefinitionList
+    //         items={[
+    //           { title: 'Initial release', content: '2016/9' },
+    //           { title: 'Github stars', content: '60,571' }
+    //         ]}
+    //       />
+    //     </Section>
+    //   </>
+    // );
+
+    // const root = document.getElementById('root');
+    // ReactDOM.render(app, root);
+
+    // ▼リスト
     // function Gif({ id }) {
     //   const src = `https://media.giphy.com/media/${id}/giphy.gif`;
     //   return <img src={src} alt="" />;
     // }
 
     // const app = <Gif id="33OrjzUFwkwEg" />;
-
     // const root = document.getElementById('root');
     // ReactDOM.render(app, root);
-
-    // const name = "Bob";
-    // const element = (
-    //   <>
-    //     <p>Hello, {name}</p>
-    //     <ul className="list">
-    //       <li className="list-items">List 1</li>
-    //       <li className="list-items">List 2</li>
-    //       <li className="list-items">List 3</li>
-    //     </ul>
-    //   </>
-    // );
-    // const root = document.getElementById('root');
-    // ReactDOM.render(element, root);
   </script>
 </body>
 </html>
