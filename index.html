@@ -15,20 +15,6 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   
   <script type="text/babel">
-    // ▼カウントボタン(stateの更新)
-    function CountButton() {
-      const countState = React.useState(0);
-      const [count, setCount] = React.useState(0);
-      // const count = countState[0];  // countState[0] => 状態
-      // const setCount = countState[1];  // countState[1] => 状態を更新するための関数
-
-      const handleClick = () => setCount(count + 1);
-      return <button onClick={handleClick}>{count}</button>;
-    }
-
-    const root = document.getElementById('root');
-    ReactDOM.render(<CountButton />, root);
-
     // ▼リスト
     // function Section({ id, title, children }) {
     //   return (
@@ -88,15 +74,54 @@
     // const root = document.getElementById('root');
     // ReactDOM.render(app, root);
 
-    // ▼リスト
-    // function Gif({ id }) {
-    //   const src = `https://media.giphy.com/media/${id}/giphy.gif`;
-    //   return <img src={src} alt="" />;
+    // ▼ランダムなネコ画像を表示(stateの更新)
+    // GIPHYから持ってきた GIF ID
+    const gifIds = [
+      '10dU7AN7xsi1I4', 'tBxyh2hbwMiqc', 'ICOgUNjpvO0PC',
+      '33OrjzUFwkwEg', 'MCfhrrNN1goH6', 'rwCX06Y5XpbLG'
+    ];
+    function getGifId() {
+      const index = Math.floor(Math.random() * Math.floor(gifIds.length));
+      return gifIds[index];
+    }
+    function Gif({ id }) {
+      const src = `https://media.giphy.com/media/${id}/giphy.gif`;
+      return <img src={src} alt="" />;
+    }
+
+    function App() {
+      const [id, setId] = React.useState(gifIds[0]);
+      const handleClick = () => {
+        setId(getGifId());
+      }
+
+      return (
+        <>
+          <p>
+            <button onClick={handleClick}>play</button>
+          </p>
+          <Gif id={id} />
+        </>
+      );
+    }
+
+    const root = document.getElementById('root');
+    ReactDOM.render(<App />, root);
+
+
+    // // ▼カウントボタン(stateの更新)
+    //     function CountButton() {
+    //   const countState = React.useState(0);
+    //   const [count, setCount] = React.useState(0);
+    //   // const count = countState[0];  // countState[0] => 状態
+    //   // const setCount = countState[1];  // countState[1] => 状態を更新するための関数
+
+    //   const handleClick = () => setCount(count + 1);
+    //   return <button onClick={handleClick}>{count}</button>;
     // }
 
-    // const app = <Gif id="33OrjzUFwkwEg" />;
     // const root = document.getElementById('root');
-    // ReactDOM.render(app, root);
+    // ReactDOM.render(<CountButton />, root);
   </script>
 </body>
 </html>
