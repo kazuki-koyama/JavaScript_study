@@ -76,38 +76,37 @@
 
     // ▼ランダムなネコ画像を表示(stateの更新)
     // GIPHYから持ってきた GIF ID
-    const gifIds = [
-      '10dU7AN7xsi1I4', 'tBxyh2hbwMiqc', 'ICOgUNjpvO0PC',
-      '33OrjzUFwkwEg', 'MCfhrrNN1goH6', 'rwCX06Y5XpbLG'
-    ];
-    function getGifId() {
-      const index = Math.floor(Math.random() * Math.floor(gifIds.length));
-      return gifIds[index];
-    }
-    function Gif({ id }) {
-      const src = `https://media.giphy.com/media/${id}/giphy.gif`;
-      return <img src={src} alt="" />;
-    }
+    // const gifIds = [
+    //   '10dU7AN7xsi1I4', 'tBxyh2hbwMiqc', 'ICOgUNjpvO0PC',
+    //   '33OrjzUFwkwEg', 'MCfhrrNN1goH6', 'rwCX06Y5XpbLG'
+    // ];
+    // function getGifId() {
+    //   const index = Math.floor(Math.random() * Math.floor(gifIds.length));
+    //   return gifIds[index];
+    // }
+    // function Gif({ id }) {
+    //   const src = `https://media.giphy.com/media/${id}/giphy.gif`;
+    //   return <img src={src} alt="" />;
+    // }
 
-    function App() {
-      const [id, setId] = React.useState(gifIds[0]);
-      const handleClick = () => {
-        setId(getGifId());
-      }
+    // function App() {
+    //   const [id, setId] = React.useState(gifIds[0]);
+    //   const handleClick = () => {
+    //     setId(getGifId());
+    //   }
 
-      return (
-        <>
-          <p>
-            <button onClick={handleClick}>play</button>
-          </p>
-          <Gif id={id} />
-        </>
-      );
-    }
+    //   return (
+    //     <>
+    //       <p>
+    //         <button onClick={handleClick}>play</button>
+    //       </p>
+    //       <Gif id={id} />
+    //     </>
+    //   );
+    // }
 
-    const root = document.getElementById('root');
-    ReactDOM.render(<App />, root);
-
+    // const root = document.getElementById('root');
+    // ReactDOM.render(<App />, root);
 
     // // ▼カウントボタン(stateの更新)
     //     function CountButton() {
@@ -122,6 +121,53 @@
 
     // const root = document.getElementById('root');
     // ReactDOM.render(<CountButton />, root);
+    const options = [
+      { value: 'js', label: 'JavaScript' },
+      { value: 'py', label: 'Python' },
+      { value: 'rb', label: 'Ruby' },
+      { value: '', label: 'その他' },
+    ];
+
+    function App() {
+      const [val, setVal] = React.useState('js');
+      const [text, setText] = React.useState('');
+      
+      const handleRadioChange = e => setVal(e.target.value);
+      const handleTextChange = e => setText(e.target.value);
+      
+      const getAnswer = () => {
+        return val === ''
+          ? text
+          : options.find(o => o.value === val).label;
+      };
+
+      return (
+        <>
+          <p>好きなプログラミング言語を教えてください。</p>
+          {options.map(option => (
+            <label key={option.value}>
+              <input
+                type="radio"
+                value={option.value}
+                onChange={handleRadioChange}
+                checked={val === option.value}
+              />
+              {option.label}
+            </label>
+          ))}
+          {val === '' && (
+            <p>
+              自由記入：<input value={text} onChange={handleTextChange} />
+            </p>
+          )}
+          <hr />
+          <p>回答：{getAnswer()}</p>
+        </>
+      );
+    }
+
+    const root = document.getElementById('root');
+    ReactDOM.render(<App />, root);
   </script>
 </body>
 </html>
