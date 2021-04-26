@@ -15,67 +15,69 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   
   <script type="text/babel">
-    // ▼カウントボタン(stateの更新)
-    function CountButton() {
-      const [count, setCount] = React.useState(0);
-      // const countState = React.useState(0);
-      // const count = countState[0];  // countState[0] => 状態
-      // const setCount = countState[1];  // countState[1] => 状態を更新するための関数
-
-      const handleClick = () => setCount(count + 1);
-      return <button onClick={handleClick}>{count}</button>;
-    }
-
-    const root = document.getElementById('root');
-    ReactDOM.render(<CountButton />, root);
-
-    // const options = [
-    //   { value: 'js', label: 'JavaScript' },
-    //   { value: 'py', label: 'Python' },
-    //   { value: 'rb', label: 'Ruby' },
-    //   { value: '', label: 'その他' },
-    // ];
-
-    // function App() {
-    //   const [val, setVal] = React.useState('js');
-    //   const [text, setText] = React.useState('');
-      
-    //   const handleRadioChange = e => setVal(e.target.value);
-    //   const handleTextChange = e => setText(e.target.value);
-      
-    //   const getAnswer = () => {
-    //     return val === ''
-    //       ? text
-    //       : options.find(o => o.value === val).label;
-    //   };
-
-    //   return (
-    //     <>
-    //       <p>好きなプログラミング言語を教えてください。</p>
-    //       {options.map(option => (
-    //         <label key={option.value}>
-    //           <input
-    //             type="radio"
-    //             value={option.value}
-    //             onChange={handleRadioChange}
-    //             checked={val === option.value}
-    //           />
-    //           {option.label}
-    //         </label>
-    //       ))}
-    //       {val === '' && (
-    //         <p>
-    //           自由記入：<input value={text} onChange={handleTextChange} />
-    //         </p>
-    //       )}
-    //       <hr />
-    //       <p>回答：{getAnswer()}</p>
-    //     </>
-    //   );
+    // // ▼カウントボタン(stateの更新)
+    // function CountButton() {
+    //   const [count, setCount] = React.useState(0);
+    //   // const countState = React.useState(0);
+    //   // const count = countState[0];  // countState[0] => 状態
+    //   // const setCount = countState[1];  // countState[1] => 状態を更新するための関数
+    //   const handleClick = () => setCount(count + 1);
+    //   return <button onClick={handleClick}>{count}</button>;
     // }
 
     // const root = document.getElementById('root');
-    // ReactDOM.render(<App />, root);
+    // ReactDOM.render(<CountButton />, root);
+
+    // ▼ラジオボタン + その他選択時にinput
+    const options = [
+      { value: 'js', label: 'JavaScript' },
+      { value: 'py', label: 'Python' },
+      { value: 'rb', label: 'Ruby' },
+      { value: '', label: 'その他' },
+    ];
+
+    function App() {
+      const [val, setVal] = React.useState('js');
+      const [text, setText] = React.useState('');
+      
+      const handleRadioChange = e => setVal(e.target.value);
+      const handleTextChange = e => setText(e.target.value);
+      
+      const getAnswer = () => {
+        // その他を選択したら、自由記入欄(input)に入力されたテキストを表示。そうでなければ、選択中のoptionsのlabelを表示
+        return val === ''
+          ? text
+          : options.find(o => o.value === val).label;
+          // 条件 ? 値1 : 値2   ←trueなら値1、falseなら値2
+      };
+
+      return (
+        <>
+          <p>好きなプログラミング言語を教えてください。</p>
+          {options.map(option => (
+            <label key={option.value}>
+              <input
+                type="radio"
+                value={option.value}
+                onChange={handleRadioChange}
+                checked={val === option.value}
+              />
+              {option.label}
+            </label>
+          ))}
+          {val === '' && (
+            <p>
+              自由記入：<input value={text} onChange={handleTextChange} />
+            </p>
+          )}
+          <hr />
+          <p>回答：{getAnswer()}</p>
+        </>
+      );
+    }
+
+    const root = document.getElementById('root');
+    ReactDOM.render(<App />, root);
   </script>
 </body>
 </html>
