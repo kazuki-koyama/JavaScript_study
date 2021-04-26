@@ -18,7 +18,20 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
   <script type="text/babel">
-    
+    function Todo() {
+      return null;
+    }
+
+    function App() {
+      return (
+        <div className="container is-fluid">
+          <Todo />
+        </div>
+      );
+    }
+
+    const root = document.getElementById('root');
+    ReactDom.render(<App />, root);
   </script>
 </body>
 </html>
