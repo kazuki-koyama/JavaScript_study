@@ -30,15 +30,15 @@
         setItems([...items, { key: getKey(), text, done: false }]);
       };
 
+      // Filterに渡すイベントハンドラ関数
       const handleFilterChange = value => setFilter(value);
-
       const displayItems = items.filter(item => {
         if (filter === 'ALL') return true;
         if (filter === 'TODO') return !item.done;
         if (filter === 'DONE') return item.done;
       });
 
-      // TodoItemに渡すイベントハンドラ関数
+      // TodoItemに渡すイベントハンドラ関数(doneを反転して、setItems)
       const handleCheck = checked => {
         const newItems = items.map(item => {
           if (item.key === checked.key) {
@@ -130,7 +130,6 @@
       const handleChange = () => {
         onCheck(item);
       };
-
       return (
         <label className="panel-block">
           <input
