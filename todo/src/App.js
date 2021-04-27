@@ -1,11 +1,31 @@
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+const CountApp = () => {
+  const [count, setCount] = useState(0);
+  const plus = () => {
+    setCount(count + 1);
+  };
+  const minus = () => {
+    setCount(count - 1);
+  };
+
+  return (
+    <div>
+      <h1>カウンターApp</h1>
+      <p>{count}</p>
+      <div>
+        <button onClick={plus}>+</button>
+        <button onClick={minus}>-</button>
+      </div>
+    </div>
+  );
+};
+
 function App() {
     return (
-      <div>
-        HelloWorld
-      </div>
+      <CountApp />
     );
   // return (
   //   <div className="App">
