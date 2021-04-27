@@ -4,60 +4,36 @@ import './App.css';
 
 const TodoApp = () => {
   const [value, setValue] = useState("");
+  const [todoList, setTodoList] = useState([]);
+
   const handleChange = e => setValue(e.target.value);
 
+  const add = () => {
+    setTodoList([...todoList, value]);
+    setValue("");
+  };
+  
   return (
     <div>
       <h1>TODO App</h1>
       <input type="text" value={value} onChange={handleChange} />
-      <p>{value}</p>
+      <div>
+        <p>{value}</p>
+        <button onClick={add}>追加</button>
+        <ul>
+          {todoList.map((todo, i) => {
+            <li key={i}>{todo}</li>
+          })}
+        </ul>
+      </div>
     </div>
   );
 };
 
-// const CountApp = () => {
-//   const [count, setCount] = useState(0);
-//   const plus = () => {
-//     setCount(count + 1);
-//   };
-//   const minus = () => {
-//     setCount(count - 1);
-//   };
-
-//   return (
-//     <div>
-//       <h1>カウンターApp</h1>
-//       <p>{count}</p>
-//       <div>
-//         <button onClick={plus}>+</button>
-//         <button onClick={minus}>-</button>
-//       </div>
-//     </div>
-//   );
-// };
-
 function App() {
-    return (
-      <CountApp />
-    );
-  // return (
-  //   <div className="App">
-  //     <header className="App-header">
-  //       <img src={logo} className="App-logo" alt="logo" />
-  //       <p>
-  //         Edit <code>src/App.js</code> and save to reload.
-  //       </p>
-  //       <a
-  //         className="App-link"
-  //         href="https://reactjs.org"
-  //         target="_blank"
-  //         rel="noopener noreferrer"
-  //       >
-  //         Learn React
-  //       </a>
-  //     </header>
-  //   </div>
-  // );
-}
+  return (
+    <TodoApp />
+  );
+};
 
 export default App;
