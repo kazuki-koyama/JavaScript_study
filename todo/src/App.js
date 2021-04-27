@@ -2,26 +2,39 @@ import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-const CountApp = () => {
-  const [count, setCount] = useState(0);
-  const plus = () => {
-    setCount(count + 1);
-  };
-  const minus = () => {
-    setCount(count - 1);
-  };
+const TodoApp = () => {
+  const [value, setValue] = useState("");
+  const handleChange = e => setValue(e.target.value);
 
   return (
     <div>
-      <h1>カウンターApp</h1>
-      <p>{count}</p>
-      <div>
-        <button onClick={plus}>+</button>
-        <button onClick={minus}>-</button>
-      </div>
+      <h1>TODO App</h1>
+      <input type="text" value={value} onChange={handleChange} />
+      <p>{value}</p>
     </div>
   );
 };
+
+// const CountApp = () => {
+//   const [count, setCount] = useState(0);
+//   const plus = () => {
+//     setCount(count + 1);
+//   };
+//   const minus = () => {
+//     setCount(count - 1);
+//   };
+
+//   return (
+//     <div>
+//       <h1>カウンターApp</h1>
+//       <p>{count}</p>
+//       <div>
+//         <button onClick={plus}>+</button>
+//         <button onClick={minus}>-</button>
+//       </div>
+//     </div>
+//   );
+// };
 
 function App() {
     return (
