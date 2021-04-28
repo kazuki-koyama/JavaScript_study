@@ -1,6 +1,24 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
+
+const AddTodo = props => {
+  return (
+    <>
+      <input type="text" value={props.value} onChange={props.onChange} />
+      <button onClick={props.onClick}>追加</button>
+    </>
+  );
+};
+
+const TodoElement = props => {
+  return (
+    <li>
+      {props.content}
+      <button onClick={props.onDelete}>削除</button>
+    </li>
+  );
+};
 
 const TodoApp = () => {
   const [value, setValue] = useState("");
@@ -8,22 +26,34 @@ const TodoApp = () => {
 
   const handleChange = e => setValue(e.target.value);
 
-  const add = () => {
-    setTodoList([...todoList, value]);
+  const handleAdd = () => {
+    const newTodo = { id: todoList.length, content: value };
+    setTodoList([...todoList, newTodo]);
     setValue("");
+  };
+
+  const handleDelete = id => {
+    const newTodoList = todoList.filter(todo => todo.id !== id);
+    setTodoList(newTodoList);
   };
   
   return (
     <div>
       <h1>TODO App</h1>
-      <input type="text" value={value} onChange={handleChange} />
       <div>
-        <p>{value}</p>
-        <button onClick={add}>追加</button>
+        <AddTodo
+          value={value}
+          onChange={handleChange}
+          onClick={handleAdd}
+        />
         <ul>
-          {todoList.map((todo, i) => {
-            <li key={i}>{todo}</li>
-          })}
+          {todoList.map(todo => (
+            <TodoElement
+              key={todo.id}
+              content={todo.content}
+              onDelete={() => handleDelete(todo.id)}
+            />
+          ))}
         </ul>
       </div>
     </div>
