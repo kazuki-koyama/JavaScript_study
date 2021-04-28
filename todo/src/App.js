@@ -17,6 +17,7 @@ const TodoElement = props => {
   return (
     <li>
       {props.value}
+      <button onClick={props.onDelete}>削除</button>
     </li>
   )
 }
@@ -33,6 +34,11 @@ const TodoApp = () => {
     setValue("");
   }
 
+  const handleDelete = id => {
+    const newTodoList = todoList.filter(todo => todo.id !== id);
+    setTodoList(newTodoList);
+  }
+
   return (
     <div>
       <h1>TodoApp</h1>
@@ -47,6 +53,7 @@ const TodoApp = () => {
             <TodoElement
              key={todo.id}
              value={todo.value}
+             onDelete={handleDelete(todo.id)}
             />
           ))}
         </ul>
