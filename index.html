@@ -18,8 +18,127 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
   <script type="text/babel">
+    const getKey = () => Math.random().toString(32).substring(2);
+
     function Todo() {
       const [items, setItems] = React.useState([]);
+      const [filter, setFilter] = React.useState('ALL');
+
+      const handleAdd = text => {
+        setItems([...items, { key: getKey(), text: text, done: false }]);
+      }
+
+      const handleFilterChange = value => setFilter(value);
+      const displayItems = items.filter(item => {
+        if (filter === 'ALL') return true;
+        if (filter === 'TODO') return !item.done;
+        if (filter === 'ALL') return item.done;
+      })
+
+      const handleCheck = checked => {
+        const newItems = items.map(item => {
+          if (item.key === checked.key) {
+            item.done = !item.done;
+          }
+          return item;
+        })
+        setItems(newItems);
+      }
+
+      return (
+        <div className="panel">
+          <div className="panel-heading">
+            ⚛️ React ToDo
+          </div>
+          <Input onAdd={handleAdd} />
+          <Filter
+            onChange={handleFilterChange}
+            value={filter}
+          />
+          {displayItems.map(item => (
+            <TodoItem
+              key={item.key}
+              item={item}
+              onCheck={handleCheck}
+            />
+          ))}
+          <div className="panel-block">
+            {displayItems.length} items
+          </div>
+        </div>
+      )
+    }
+
+    // ▼以下、子コンポーネント
+    function Input({ onAdd }) {
+      const [text, setText] = React.useState("");
+      
+      const handleChange = e => setText(e.target.value);
+      const handleKeyDown = e => {
+        if (e.key === 'Enter') {
+          onAdd(text);
+          setText("");
+        }
+      }
+
+      return (
+        <div className="panel-block">
+          <input
+            type="text"
+            className="text"
+            placeholder="Enter to add"
+            value={text}
+            onChange={handleChange}
+            onKeyDown={handleKeyDown}
+          />
+        </div>
+      )
+    }
+
+    function Filter({ value, onChange }) {
+      const handleClick = (key, e) => {
+        e.preventDefault();
+        onChange(key);
+      };
+
+      return (
+        <div className="panel-tabs">
+          <a
+            href="#"
+            onClick={() => handleClick("ALL")}
+            className={classNames({ 'is-active': value === 'ALL' })}
+          >ALL</a>
+          <a
+            href="#"
+            onClick={() => handleClick("TODO")}
+            className={classNames({ 'is-active': value === 'TODO' })}
+          >TODO</a>
+          <a
+            href="#"
+            onClick={() => handleClick("DONE")}
+            className={classNames({ 'is-active': value === 'DONE' })}
+          >DONE</a>
+        </div>
+      )
+    }
+
+    function TodoItem ({ item, onCheck }) {
+      return (
+        <label className="panel-block">
+          <input
+            type="checkbox"
+            checked={item.done}
+            onChange={() => onCheck(item)}
+          />
+          <span
+            className={classNames({
+              'has-text-grey-light': item.done
+            })}
+          >
+          {item.text}
+          </span>
+        </label>
+      )
     }
 
     function App() {

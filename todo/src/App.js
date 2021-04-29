@@ -4,7 +4,6 @@ import './App.css';
 
 // 簡易TODOアプリ(todoリストの表示のみ)
 const AddTodo = props => {
-
   return (
     <>
       <input type="text" value={props.value} onChange={props.onChange} />
