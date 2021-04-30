@@ -32,7 +32,7 @@
       const displayItems = items.filter(item => {
         if (filter === 'ALL') return true;
         if (filter === 'TODO') return !item.done;
-        if (filter === 'ALL') return item.done;
+        if (filter === 'DONE') return item.done;
       })
 
       const handleCheck = checked => {
