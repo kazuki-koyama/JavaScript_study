@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-// import logo from './logo.svg';
 import './App.css';
 
-// 簡易TODOアプリ(todoリストの表示のみ)
 const AddTodo = props => {
   return (
     <>
